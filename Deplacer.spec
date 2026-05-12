@@ -6,7 +6,7 @@ datas += collect_data_files('customtkinter')
 
 
 a = Analysis(
-    ['Deplacer.py'],
+    ['deplacer.py'],
     pathex=[],
     binaries=[],
     datas=datas,

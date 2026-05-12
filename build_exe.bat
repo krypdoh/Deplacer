@@ -12,7 +12,7 @@ pyinstaller ^
   --windowed ^
   --name Deplacer ^
   --collect-data customtkinter ^
-  Deplacer.py
+  deplacer.py
 
 echo.
 if exist dist\Deplacer.exe (

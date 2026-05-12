@@ -1,5 +1,5 @@
 """
-WinSifter — File Organizer
+Deplacer — File Organizer
 Sorts files in a chosen directory into categorized subfolders.
 
 Version 1.0
@@ -42,7 +42,7 @@ import customtkinter as ctk
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 
-APP_NAME = "WinSifter"
+APP_NAME = "Deplacer"
 APPDATA  = pathlib.Path(os.environ.get("APPDATA", pathlib.Path.home())) / APP_NAME
 CFG_FILE = APPDATA / "config.json"
 
@@ -144,7 +144,7 @@ DEFAULT_CATEGORIES = [
 ]
 
 DEFAULT_CONFIG: dict = {
-    "prefix":       "Sifter-",
+    "prefix":       "Deplacer-",
     "move_folders": False,
     "recursive":    False,
     "categories":   DEFAULT_CATEGORIES,
@@ -176,7 +176,7 @@ def _deep_copy(obj):
     return json.loads(json.dumps(obj))
 
 
-# ── Core sifter logic ─────────────────────────────────────────────────────────
+# ── Core deplacer logic ─────────────────────────────────────────────────────────
 
 def build_ext_map(cfg: dict) -> dict:
     """Returns {'.ext': 'dest_folder_name'} for all enabled, non-catch-all categories."""
@@ -300,10 +300,10 @@ ctk.set_default_color_theme("blue")
 FONT_MONO = ("Consolas", 12)
 
 
-class WinSifterApp(ctk.CTk):
+class DeplacerApp(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("WinSifter")
+        self.title("Deplacer")
         self.geometry("900x640")
         self.minsize(720, 520)
         self.config_data   = load_config()
@@ -321,7 +321,7 @@ class WinSifterApp(ctk.CTk):
         hdr.grid(row=0, column=0, sticky="ew", padx=20, pady=(16, 0))
         ctk.CTkLabel(
             hdr,
-            text="WinSifter",
+            text="Deplacer",
             font=ctk.CTkFont(family="Arial Black", size=34, weight="bold"),
         ).pack(side="left")
         ctk.CTkLabel(
@@ -349,14 +349,14 @@ class WinSifterApp(ctk.CTk):
 
     def _show_about(self):
         win = ctk.CTkToplevel(self)
-        win.title("About WinSifter")
+        win.title("About Deplacer")
         win.geometry("460x420")
         win.resizable(False, False)
         win.grab_set()  # modal
 
         ctk.CTkLabel(
             win,
-            text="WinSifter",
+            text="Deplacer",
             font=ctk.CTkFont(family="Arial Black", size=28, weight="bold"),
         ).pack(pady=(28, 2))
 
@@ -392,14 +392,14 @@ class WinSifterApp(ctk.CTk):
         # Website link
         site_lbl = tk.Label(
             win,
-            text="🌐  krypdoh.github.io/WinSifter",
+            text="🌐  krypdoh.github.io/Deplacer",
             fg="#0088FF",
             cursor="hand2",
             font=("Segoe UI", 11, "underline"),
             bg=win.cget("bg"),
         )
         site_lbl.pack()
-        site_lbl.bind("<Button-1>", lambda _: webbrowser.open("https://krypdoh.github.io/WinSifter"))
+        site_lbl.bind("<Button-1>", lambda _: webbrowser.open("https://krypdoh.github.io/Deplacer"))
 
         ctk.CTkLabel(win, text="").pack(pady=4)  # spacer
 
@@ -481,7 +481,7 @@ class WinSifterApp(ctk.CTk):
             width=150,
             fg_color="#00C853",
             hover_color="#009E42",
-            command=self._run_sifter,
+            command=self._run_deplacer,
         )
         self.run_btn.pack(side="left")
 
@@ -502,7 +502,7 @@ class WinSifterApp(ctk.CTk):
         )
         self.log.grid(row=3, column=0, sticky="nsew")
         self.log.configure(state="disabled")
-        self._log("WinSifter ready.  Choose a folder, then click  ▶ Preview  or  ⚡ Run.\n")
+        self._log("Deplacer ready.  Choose a folder, then click  ▶ Preview  or  ⚡ Run.\n")
 
     # ── Settings Tab ──────────────────────────────────────────────────────────
 
@@ -518,12 +518,12 @@ class WinSifterApp(ctk.CTk):
         ctk.CTkLabel(top, text="Folder Prefix:").grid(
             row=0, column=0, padx=(0, 6), sticky="w"
         )
-        self.prefix_var = tk.StringVar(value=self.config_data.get("prefix", "Sifter-"))
+        self.prefix_var = tk.StringVar(value=self.config_data.get("prefix", "Deplacer-"))
         self.prefix_entry = ctk.CTkEntry(top, textvariable=self.prefix_var, width=130)
         self.prefix_entry.grid(row=0, column=1, padx=(0, 10))
 
         self.no_prefix_var = tk.BooleanVar(
-            value=(self.config_data.get("prefix", "Sifter-") == "")
+            value=(self.config_data.get("prefix", "Deplacer-") == "")
         )
         ctk.CTkCheckBox(
             top,
@@ -702,7 +702,7 @@ class WinSifterApp(ctk.CTk):
             self.prefix_var.set("")
             self.prefix_entry.configure(state="disabled")
         else:
-            self.prefix_var.set("Sifter-")
+            self.prefix_var.set("Deplacer-")
             self.prefix_entry.configure(state="normal")
 
     def _toggle_advanced(self):
@@ -802,7 +802,7 @@ class WinSifterApp(ctk.CTk):
             )
         self._log(f"\n   {len(actions)} item(s) shown — click  ⚡ Run  to execute.\n")
 
-    def _run_sifter(self):
+    def _run_deplacer(self):
         target = self._validate_target()
         if not target:
             return
@@ -851,5 +851,5 @@ class WinSifterApp(ctk.CTk):
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    app = WinSifterApp()
+    app = DeplacerApp()
     app.mainloop()

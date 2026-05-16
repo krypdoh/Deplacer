@@ -6,7 +6,7 @@ datas += collect_data_files('customtkinter')
 
 
 a = Analysis(
-    ['deplacer.py'],
+    ['winsifter.py'],
     pathex=[],
     binaries=[],
     datas=datas,
@@ -26,7 +26,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='Deplacer',
+    name='WinSifter',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -39,4 +39,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['Microsoft-Fluentui-Emoji-Flat-Card-File-Box-Flat.ico'],
 )

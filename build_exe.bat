@@ -1,23 +1,23 @@
 @echo off
-REM ─────────────────────────────────────────────────────────────────────────────
-REM  Deplacer — Build standalone .exe
-REM  Requires:  pip install pyinstaller customtkinter
-REM  Output:    dist\Deplacer.exe
-REM ─────────────────────────────────────────────────────────────────────────────
+REM ---------------------------------------------------------------------------
+REM  WinSifter:  Build standalone .exe
+REM  Requires:   pip install pyinstaller customtkinter
+REM  Output:     dist\WinSifter.exe
+REM ---------------------------------------------------------------------------
 
-echo Building Deplacer.exe with PyInstaller...
+echo Building WinSifter.exe with PyInstaller...
 
 pyinstaller ^
   --onefile ^
   --windowed ^
-  --name Deplacer ^
+  --name WinSifter ^
   --collect-data customtkinter ^
-  deplacer.py
+  winsifter.py
 
 echo.
-if exist dist\Deplacer.exe (
-    echo  Build complete:  dist\Deplacer.exe
+if exist dist\WinSifter.exe (
+    echo  Build complete:  dist\WinSifter.exe
 ) else (
-    echo  Build FAILED — check output above for errors.
+    echo  Build FAILED - check output above for errors.
 )
 pause
